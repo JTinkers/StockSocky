@@ -7,6 +7,7 @@
 		</v-row>
 		<v-row>
 			<v-col cols='12'>
+				<ItemDialog ref='dialog'/>
 				<v-data-table hide-default-footer :search='search' :items='stocks' :headers='headers'>
 					<template #item.estimatedProfit='{ item, value }'>
 						<span :class='{ "value-positive": value > 0, "value-negative": value < 0 }' v-text='value'/>
@@ -14,18 +15,27 @@
 					<template #item.estimatedProfitPercentage='{ item, value }'>
 						<span :class='{ "value-positive": value > 0, "value-negative": value < 0 }' v-text='value + "%"'/>
 					</template>
+					<template #item.actions='{ item }'>
+						<v-icon v-text='"mdi-lead-pencil"' @click='edit(item)'/>
+						<v-icon v-text='"mdi-delete"' @click='remove(item)'/>
+					</template>
 				</v-data-table>
 			</v-col>
 		</v-row>
-		<v-row>
-			<span v-text='"crud for stocks here"'/>
+		<v-row justify='end'>
+			<v-col cols='auto'>
+				<v-btn outlined v-text='"Add"' @click='$refs.dialog.open()'/>
+			</v-col>
 		</v-row>
 	</v-container>
 </template>
 
 <script>
+	import ItemDialog from './partials/ItemDialog'
+
 	export default
 	{
+		components: { ItemDialog },
 		data: () =>
 		({
 			search: null,
@@ -73,6 +83,11 @@
 					{
 						text: 'Last Update',
 						value: 'lastUpdate'
+					},
+					{
+						text: 'Actions',
+						value: 'actions',
+						align: 'center'
 					}
 				]
 
@@ -81,6 +96,18 @@
 		},
 		methods:
 		{
+			edit(stock)
+			{
+				this.$refs.dialog.open(Object.assign({}, stock))
+			},
+			async remove(stock)
+			{
+				var i = this.stocks.indexOf(stock)
+
+				await this.$axios.delete('/api/stocks/' + stock.id)
+
+				this.$delete(this.stocks, i)
+			},
 			async openSocket()
 			{
 				var socket = new WebSocket('wss://ws.finnhub.io?token=brjhto7rh5r9g3ot4erg')

@@ -11,7 +11,7 @@ namespace StockSockyService.Data.Models
         [Key]
         public int Id { get; set; }
 
-        // public string Name { get; set; }
+        public string Name { get; set; }
 
         public string Symbol { get; set; }
 

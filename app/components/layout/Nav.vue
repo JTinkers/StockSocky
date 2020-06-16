@@ -32,9 +32,9 @@
 					to: '/'
 				},
 				{
-					name: 'Transactions',
+					name: 'Purchases',
 					icon: 'mdi-plus-minus',
-					to: '/transactions'
+					to: '/purchases'
 				},
 				{
 					name: 'Settings',

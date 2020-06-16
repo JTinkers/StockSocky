@@ -21,7 +21,7 @@ namespace StockSockyService
 
             services.AddControllers();
             
-            services.AddSingleton<MainContext>();
+            services.AddDbContext<MainContext>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
