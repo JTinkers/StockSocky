@@ -22,9 +22,15 @@ namespace StockSockyService.Data.Models
         public virtual double InvestedValue => Purchases.Sum(x => x.Total);
 
         [NotMapped]
-        public virtual double MarketValue { get; set; }
+        public virtual string CompanyName { get; set; }
+
+        [NotMapped]
+        public virtual double MarketValue { get; set; }              
 
         [NotMapped]
         public virtual double EstimatedProfit => MarketValue - InvestedValue;
+
+        [NotMapped]
+        public virtual double EstimatedProfitPercentage => EstimatedProfit / InvestedValue;
     }
 }

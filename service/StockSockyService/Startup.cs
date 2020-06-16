@@ -2,8 +2,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using StockSockyService.Data.Contexts;
+using StockSockyService.Services;
 
 namespace StockSockyService
 {
@@ -18,29 +18,16 @@ namespace StockSockyService
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<MainContext>();
-
-            services.AddControllers().AddNewtonsoftJson(options =>
-                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-
             services.AddCors(x => x.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin()));
+            
+            services.AddSingleton<MainContext>();
+
+            services.AddHostedService<FinnhubService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseRouting();
-
             app.UseCors("AllowOrigin");
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
         }
     }
 }

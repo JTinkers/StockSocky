@@ -28,6 +28,10 @@
 				var headers =
 				[
 					{
+						text: 'Company',
+						value: 'companyName'
+					},
+					{
 						text: 'Symbol',
 						value: 'symbol'
 					},
@@ -46,6 +50,10 @@
 					{
 						text: 'Est. Profit',
 						value: 'estimatedProfit'
+					},
+					{
+						text: 'Est. Profit(%)',
+						value: 'estimatedProfitPercentage'
 					}
 				]
 

@@ -150,5 +150,7 @@ D:\Git Projects\StockSocky\service\StockSockyService\bin\Debug\netcoreapp3.1\Dat
 D:\Git Projects\StockSocky\service\StockSockyService\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
 D:\Git Projects\StockSocky\service\StockSockyService\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 D:\Git Projects\StockSocky\service\StockSockyService\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+D:\Git Projects\StockSocky\service\StockSockyService\bin\Debug\netcoreapp3.1\System.Net.WebSockets.WebSocketProtocol.dll
+D:\Git Projects\StockSocky\service\StockSockyService\bin\Debug\netcoreapp3.1\websocket-sharp.dll
 D:\Git Projects\StockSocky\service\StockSockyService\obj\Debug\netcoreapp3.1\StockSockyService.csproj.CoreCompileInputs.cache
 D:\Git Projects\StockSocky\service\StockSockyService\obj\Debug\netcoreapp3.1\StockSockyService.MvcApplicationPartsAssemblyInfo.cache
