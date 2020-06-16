@@ -10,10 +10,13 @@
 				<ItemDialog ref='dialog'/>
 				<v-data-table hide-default-footer :search='search' :items='stocks' :headers='headers'>
 					<template #item.estimatedProfit='{ item, value }'>
-						<span :class='{ "value-positive": value > 0, "value-negative": value < 0 }' v-text='value'/>
+						<span :class='{ "value-positive": value > 0, "value-negative": value < 0 }' v-text='value && value + " USD"'/>
 					</template>
 					<template #item.estimatedProfitPercentage='{ item, value }'>
-						<span :class='{ "value-positive": value > 0, "value-negative": value < 0 }' v-text='value + "%"'/>
+						<span :class='{ "value-positive": value > 0, "value-negative": value < 0 }' v-text='((value && !isNaN(value)) && value + "%") || ""'/>
+					</template>
+					<template #item.lastUpdate='{ item, value }'>
+						<span v-text='value && $moment(value).fromNow()'/>
 					</template>
 					<template #item.actions='{ item }'>
 						<v-icon v-text='"mdi-lead-pencil"' @click='edit(item)'/>
@@ -100,15 +103,15 @@
 			{
 				this.$refs.dialog.open(Object.assign({}, stock))
 			},
-			async remove(stock)
+			remove(stock)
 			{
 				var i = this.stocks.indexOf(stock)
 
-				await this.$axios.delete('/api/stocks/' + stock.id)
+				this.$axios.delete('/api/stocks/' + stock.id)
 
 				this.$delete(this.stocks, i)
 			},
-			async openSocket()
+			openSocket()
 			{
 				var socket = new WebSocket('wss://ws.finnhub.io?token=brjhto7rh5r9g3ot4erg')
 
@@ -140,7 +143,7 @@
 							stock.marketValue = data.p.toFixed(2)
 							stock.estimatedProfit = ((stock.marketValue * stock.quantity) - stock.investedValue).toFixed(2)
 							stock.estimatedProfitPercentage = ((stock.estimatedProfit / stock.investedValue) * 100).toFixed(2)
-							stock.lastUpdate = this.$moment(data.t).fromNow()
+							stock.lastUpdate = data.t
 						})
 					}
 				}
@@ -152,9 +155,9 @@
 				this.stocks = data
 
 				// set placeholders for virtual columns
-				this.stocks.forEach(x => this.$set(x, 'marketValue', 0))
-				this.stocks.forEach(x => this.$set(x, 'estimatedProfit', 0))
-				this.stocks.forEach(x => this.$set(x, 'estimatedProfitPercentage', 0))
+				this.stocks.forEach(x => this.$set(x, 'marketValue', null))
+				this.stocks.forEach(x => this.$set(x, 'estimatedProfit', null))
+				this.stocks.forEach(x => this.$set(x, 'estimatedProfitPercentage', null))
 				this.stocks.forEach(x => this.$set(x, 'lastUpdate', null))
 			}
 		}

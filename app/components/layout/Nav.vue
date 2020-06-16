@@ -37,11 +37,6 @@
 					to: '/purchases'
 				},
 				{
-					name: 'Settings',
-					icon: 'mdi-cog',
-					to: '/settings'
-				},
-				{
 					name: 'Project',
 					icon: 'mdi-github',
 					href: 'https://github.com/JTinkers/StockSocky'
