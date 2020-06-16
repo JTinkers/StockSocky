@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StockSockyService.Data.Contexts;
-using StockSockyService.Services;
 
 namespace StockSockyService
 {
@@ -19,15 +18,22 @@ namespace StockSockyService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors(x => x.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin()));
+
+            services.AddControllers();
             
             services.AddSingleton<MainContext>();
-
-            services.AddHostedService<FinnhubService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseCors("AllowOrigin");
+
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }

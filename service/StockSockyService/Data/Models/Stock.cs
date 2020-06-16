@@ -11,26 +11,14 @@ namespace StockSockyService.Data.Models
         [Key]
         public int Id { get; set; }
 
+        // public string Name { get; set; }
+
         public string Symbol { get; set; }
 
-        public virtual List<Purchase> Purchases { get; set; }
+        public virtual ICollection<Purchase> Purchases { get; set; }
 
-        [NotMapped]
-        public virtual int Quantity => Purchases.Sum(x => x.Quantity);
+        public virtual int? Quantity => Purchases?.Sum(x => x.Quantity);
 
-        [NotMapped]
-        public virtual double InvestedValue => Purchases.Sum(x => x.Total);
-
-        [NotMapped]
-        public virtual string CompanyName { get; set; }
-
-        [NotMapped]
-        public virtual double MarketValue { get; set; }              
-
-        [NotMapped]
-        public virtual double EstimatedProfit => MarketValue - InvestedValue;
-
-        [NotMapped]
-        public virtual double EstimatedProfitPercentage => EstimatedProfit / InvestedValue;
+        public virtual double? InvestedValue => Purchases?.Sum(x => x.Total);
     }
 }

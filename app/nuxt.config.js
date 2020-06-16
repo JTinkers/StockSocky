@@ -28,12 +28,20 @@ export default
 	buildModules:
 	[
 		'@nuxtjs/vuetify',
+		'@nuxtjs/style-resources'
 	],
 	modules:
 	[
 		'@nuxtjs/axios',
 		'@nuxtjs/proxy'
 	],
+	styleResources:
+	{
+		sass: [],
+		scss: ['~/assets/scss/resources/*.scss'],
+		less: [],
+		stylus: []
+	},
 	proxy:
 	{
 		'/api': 'http://localhost:5000'

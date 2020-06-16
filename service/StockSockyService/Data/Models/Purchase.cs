@@ -18,9 +18,6 @@ namespace StockSockyService.Data.Models
 
         public double Value { get; set; }
 
-        public virtual Stock Stock { get; set; }
-
-        [NotMapped]
         public virtual double Total => Value * Quantity;
     }
 }

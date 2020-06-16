@@ -1,0 +1,10 @@
+$palette:
+(
+    'green': #3DCC3D,
+    'red': #CC3D3D
+);
+
+@function palette($color)
+{
+    @return map-get($palette, $color);
+}

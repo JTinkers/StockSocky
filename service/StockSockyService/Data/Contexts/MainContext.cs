@@ -11,7 +11,8 @@ namespace StockSockyService.Data.Contexts
     public class MainContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlite("Data Source=Database.db");
+            => options.UseLazyLoadingProxies(true)
+                .UseSqlite("Data Source=Database.db");
 
         public DbSet<Stock> Stocks { get; set; }
 
