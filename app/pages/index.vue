@@ -1,7 +1,7 @@
 <template>
 	<v-container fluid>
 		<v-row justify='end'>
-			<v-col cols='2'>
+			<v-col cols='4'>
 				<v-text-field v-model='search' outlined placeholder='Search..'/>
 			</v-col>
 		</v-row>
@@ -69,6 +69,10 @@
 					{
 						text: 'Est. Profit (%)',
 						value: 'estimatedProfitPercentage'
+					},
+					{
+						text: 'Last Update',
+						value: 'lastUpdate'
 					}
 				]
 
@@ -109,6 +113,7 @@
 							stock.marketValue = data.p.toFixed(2)
 							stock.estimatedProfit = ((stock.marketValue * stock.quantity) - stock.investedValue).toFixed(2)
 							stock.estimatedProfitPercentage = ((stock.estimatedProfit / stock.investedValue) * 100).toFixed(2)
+							stock.lastUpdate = this.$moment(data.t).fromNow()
 						})
 					}
 				}
@@ -123,6 +128,7 @@
 				this.stocks.forEach(x => this.$set(x, 'marketValue', 0))
 				this.stocks.forEach(x => this.$set(x, 'estimatedProfit', 0))
 				this.stocks.forEach(x => this.$set(x, 'estimatedProfitPercentage', 0))
+				this.stocks.forEach(x => this.$set(x, 'lastUpdate', null))
 			}
 		}
 	}

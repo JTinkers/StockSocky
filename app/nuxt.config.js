@@ -28,7 +28,8 @@ export default
 	buildModules:
 	[
 		'@nuxtjs/vuetify',
-		'@nuxtjs/style-resources'
+		'@nuxtjs/style-resources',
+		'@nuxtjs/moment'
 	],
 	modules:
 	[
