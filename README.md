@@ -1,6 +1,8 @@
 # StockSocky
 A lightweight app for stock price tracking.
 
+![https://i.imgur.com/p61HkvT.png](https://i.imgur.com/p61HkvT.png)
+
 # How it works - behind the scenes
 StockSocky is split into two layers: an app and a service.
 
