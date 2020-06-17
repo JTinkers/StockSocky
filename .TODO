@@ -1,0 +1,3 @@
+- Add 'refresh via API' button to stocks.
+- Make installation and usage simpler.
+- Put finnhub data in Vuex to prevent loss of it during page change/stock add etc.

@@ -9,6 +9,9 @@
 			<v-col cols='12'>
 				<ItemDialog ref='dialog'/>
 				<v-data-table hide-default-footer :search='search' :items='stocks' :headers='headers'>
+					<template #item.investedValue='{ value }'>
+						<span v-text='value && value.toFixed(2)'/>
+					</template>
 					<template #item.estimatedProfit='{ item, value }'>
 						<span :class='{ "value-positive": value > 0, "value-negative": value < 0 }' v-text='value && value + " USD"'/>
 					</template>
