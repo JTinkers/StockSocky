@@ -6,12 +6,9 @@ A lightweight app for stock price tracking.
 # How it works - behind the scenes
 StockSocky is split into two layers: an app and a service.
 
-The service is simply a Web API serving as a database provider.
+The service is simply a Web API with a connected database.
 
 The app handles management of stocks and purchases aswell as market value fetching from finnhub API.
-
-The point of having separate service and an app without a clientside database is to be able to have a single database with multiple clients
-\- just in case if you wanted to host it in different configurations.
 
 StockSocky was built using Nuxt, Vue, WebSockets and ASP.NET Core.
 
