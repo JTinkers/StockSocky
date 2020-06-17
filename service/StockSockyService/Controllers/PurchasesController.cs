@@ -46,7 +46,7 @@ namespace StockSockyService.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPurchase(int id, Purchase purchase)
+        public async Task<ActionResult<Purchase>> PutPurchase(int id, Purchase purchase)
         {
             if (id != purchase.Id)
             {
@@ -71,7 +71,7 @@ namespace StockSockyService.Controllers
                 }
             }
 
-            return NoContent();
+            return purchase;
         }
 
         // POST: api/Purchases
@@ -83,7 +83,9 @@ namespace StockSockyService.Controllers
             _context.Purchases.Add(purchase);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPurchase", new { id = purchase.Id }, purchase);
+            var result = _context.Purchases.Include(x => x.Stock).First(x => x.Id == purchase.Id);
+
+            return CreatedAtAction("GetPurchase", new { id = purchase.Id }, result);
         }
 
         // DELETE: api/Purchases/5

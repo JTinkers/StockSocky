@@ -14,7 +14,8 @@
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/moment": "^1.6.1",
     "@nuxtjs/style-resources": "^1.0.0",
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.0.0",
+    "nuxt-client-init-module": "^0.1.8"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.0.0",

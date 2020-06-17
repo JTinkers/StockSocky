@@ -1,5 +1,5 @@
 <template>
-	<v-dialog width='600' v-model='show'>
+	<v-dialog width='400' v-model='show'>
 		<v-card>
 			<v-card-title>
 				<span class='headline' v-text='"Stock"'/>
@@ -8,7 +8,7 @@
 				<v-container>
 					<v-row>
 						<v-col cols='12'>
-							<v-select outlined :disabled='item.id' :items='stocks' item-value='id' :item-text='(item) => item.symbol + " - " + item.name' label='Stock' v-model='item.stockId'/>
+							<v-select outlined :disabled='item.id != null' :items='stocks' item-value='id' :item-text='(item) => item.symbol + " - " + item.name' label='Stock' v-model='item.stockId'/>
 						</v-col>
 					</v-row>
 					<v-row>
@@ -39,14 +39,14 @@
 		data: () =>
 		({
 			show: false,
-			item: {},
-			stocks: []
+			item: {}
 		}),
-		async mounted()
+		computed:
 		{
-			var { data } = await this.$axios.get('/api/stocks')
-
-			this.stocks = data
+			stocks()
+			{
+				return this.$store.state.stocks.items
+			}
 		},
 		methods:
 		{
@@ -60,9 +60,9 @@
 			{
 				// update else add
 				if(this.item.id)
-					await this.$axios.put('/api/purchases/' + this.item.id, this.item)
+					this.$store.dispatch('purchases/update', this.item)
 				else
-					await this.$axios.post('/api/purchases', this.item)
+					this.$store.dispatch('purchases/create', this.item)
 
 				this.cancel()
 			},

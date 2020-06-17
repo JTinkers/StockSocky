@@ -48,9 +48,9 @@
 			{
 				// update else add
 				if(this.item.id)
-					await this.$axios.put('/api/stocks/' + this.item.id, this.item)
+					this.$store.dispatch('stocks/update', this.item)
 				else
-					await this.$axios.post('/api/stocks', this.item)
+					this.$store.dispatch('stocks/create', this.item)
 
 				this.cancel()
 			},

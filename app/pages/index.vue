@@ -41,16 +41,25 @@
 		components: { ItemDialog },
 		data: () =>
 		({
-			search: null,
-			stocks: []
+			search: null
 		}),
 		mounted()
 		{
-			this.fetch()
 			this.openSocket()
 		},
 		computed:
 		{
+			stocks()
+			{
+				var stocks = this.$store.state.stocks.items.map((b, idx) => Object.assign({ index: idx }, b))
+
+				stocks.forEach(x => this.$set(x, 'marketValue', null))
+				stocks.forEach(x => this.$set(x, 'estimatedProfit', null))
+				stocks.forEach(x => this.$set(x, 'estimatedProfitPercentage', null))
+				stocks.forEach(x => this.$set(x, 'lastUpdate', null))
+
+				return stocks
+			},
 			headers()
 			{
 				var headers =
@@ -105,11 +114,7 @@
 			},
 			remove(stock)
 			{
-				var i = this.stocks.indexOf(stock)
-
-				this.$axios.delete('/api/stocks/' + stock.id)
-
-				this.$delete(this.stocks, i)
+				this.$store.dispatch('stocks/delete', stock)
 			},
 			openSocket()
 			{
@@ -147,18 +152,6 @@
 						})
 					}
 				}
-			},
-			async fetch()
-			{
-				var { data } = await this.$axios.get('/api/stocks')
-
-				this.stocks = data
-
-				// set placeholders for virtual columns
-				this.stocks.forEach(x => this.$set(x, 'marketValue', null))
-				this.stocks.forEach(x => this.$set(x, 'estimatedProfit', null))
-				this.stocks.forEach(x => this.$set(x, 'estimatedProfitPercentage', null))
-				this.stocks.forEach(x => this.$set(x, 'lastUpdate', null))
 			}
 		}
 	}

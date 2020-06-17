@@ -33,6 +33,7 @@ export default
 	],
 	modules:
 	[
+		'nuxt-client-init-module',
 		'@nuxtjs/axios',
 		'@nuxtjs/proxy'
 	],

@@ -32,15 +32,14 @@
 		components: { ItemDialog },
 		data: () =>
 		({
-			search: null,
-			purchases: []
+			search: null
 		}),
-		mounted()
-		{
-			this.fetch()
-		},
 		computed:
 		{
+			purchases()
+			{
+				return this.$store.state.purchases.items
+			},
 			headers()
 			{
 				var headers =
@@ -83,17 +82,7 @@
 			},
 			remove(purchase)
 			{
-				var i = this.purchases.indexOf(purchase)
-
-				this.$axios.delete('/api/purchases/' + purchase.id)
-
-				this.$delete(this.purchases, i)
-			},
-			async fetch()
-			{
-				var { data } = await this.$axios.get('/api/purchases')
-
-				this.purchases = data
+				this.$store.dispatch('purchases/delete', purchase)
 			}
 		}
 	}
