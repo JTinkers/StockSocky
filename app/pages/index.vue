@@ -34,7 +34,7 @@
 </template>
 
 <script>
-	import ItemDialog from './partials/ItemDialog'
+	import ItemDialog from './index/partials/ItemDialog'
 
 	export default
 	{

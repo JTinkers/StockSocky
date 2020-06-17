@@ -19,7 +19,9 @@ namespace StockSockyService
         {
             services.AddCors(x => x.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin()));
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddNewtonsoftJson(options => 
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             
             services.AddDbContext<MainContext>();
         }
