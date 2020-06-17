@@ -1,3 +1,3 @@
 cd app
 npm install
-npm run build
+nuxt build
