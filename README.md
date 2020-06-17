@@ -42,4 +42,5 @@ env:
 - Run `start_app.bat`
 
 The app and the service are now running, you can add any stocks to track their market values and add purchases to calculate potential profits.
+
 **If you see no market values, just wait a while - stocks update every few seconds or even minutes**.
