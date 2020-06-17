@@ -6,7 +6,7 @@ export default
 	{
 		finnhub:
 		{
-			key: 'brl1ggfrh5r8d4o97skg'
+			key: ''
 		}
 	},
 	mode: 'spa',
