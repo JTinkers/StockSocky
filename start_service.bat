@@ -1,2 +1,2 @@
-cd service/StockSockyService/bin/Debug/netcoreapp3.1
+cd service/StockSockyService/bin/Release/netcoreapp3.1
 start StockSockyService.exe

@@ -106,6 +106,17 @@
 				return headers
 			}
 		},
+		watch:
+		{
+			stocks:
+			{
+				handler()
+				{
+					this.openSocket()
+				},
+				deep: true
+			}
+		},
 		methods:
 		{
 			edit(stock)
@@ -118,7 +129,7 @@
 			},
 			openSocket()
 			{
-				var socket = new WebSocket('wss://ws.finnhub.io?token=brjhto7rh5r9g3ot4erg')
+				var socket = new WebSocket('wss://ws.finnhub.io?token=' + process.env.finnhub.key)
 
 				socket.onopen = () =>
 				{

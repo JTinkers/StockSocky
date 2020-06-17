@@ -2,6 +2,13 @@ import colors from 'vuetify/es5/util/colors'
 
 export default
 {
+	env:
+	{
+		finnhub:
+		{
+			key: 'brjhto7rh5r9g3ot4erg'
+		}
+	},
 	mode: 'spa',
 	head:
 	{
