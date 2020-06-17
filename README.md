@@ -35,7 +35,10 @@ env:
     }
 }
 ```
-- Save the file and run `install.bat`.
+- Save the file.
+- Open console inside the `app` folder and run the following commands:
+    - `npm install`
+    - `npm run build`
 
 # Usage
 - Run `start_service.bat`
